@@ -47,7 +47,7 @@ class Okta:
         params: dict | None = None,
         data: dict | None = None,
         parse_json: bool = True,
-    ) -> dict | str:
+    ) -> dict:
         """Make an API call to Okta.
 
         Params:
@@ -62,7 +62,7 @@ class Okta:
             raise OktaApiException(OktaError.from_dict(response.json()))
         if parse_json is True:
             return response.json()
-        return response.text
+        return {"data": response.text}
 
     def find_user_id_by_email(self, email: str) -> str | None:
         """Find a user's ID by their email address.
