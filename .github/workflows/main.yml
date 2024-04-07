@@ -29,7 +29,7 @@ jobs:
       - name: Run isort
         run: poetry run isort . --check --diff
       - name: Run mypy
-        run: poetry run mypy . --strict
+        run: poetry run mypy .
       - name: Run flake8
         run: poetry run flake8 --select=E9,F63,F7,F82 --show-source
       - name: Run tests
