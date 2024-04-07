@@ -47,7 +47,7 @@ class Okta:
         params: dict | None = None,
         data: dict | None = None,
         parse_json: bool = True,
-    ) -> dict:
+    ) -> dict | str:
         """Make an API call to Okta.
 
         Params:
