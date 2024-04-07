@@ -41,10 +41,17 @@ class Okta:
         self.api_key = api_key
 
     def make_api_call(
-        self, method: str, api_endpoint: str, params: dict | None = None, data: dict | None = None
+        self,
+        method: str,
+        api_endpoint: str,
+        params: dict | None = None,
+        data: dict | None = None,
+        parse_json: bool = True,
     ) -> dict:
         """Make an API call to Okta.
 
+        Params:
+            parse_json: If True, the response will be parsed as JSON.
         Raises:
             OktaApiException: If the API call fails.
         """
@@ -53,7 +60,9 @@ class Okta:
         response = requests.request(method, url, params=params, json=data, headers=headers)
         if 400 <= response.status_code < 500:
             raise OktaApiException(OktaError.from_dict(response.json()))
-        return response.json()
+        if parse_json is True:
+            return response.json()
+        return response.text
 
     def find_user_id_by_email(self, email: str) -> str | None:
         """Find a user's ID by their email address.
@@ -66,13 +75,13 @@ class Okta:
             return None
         return result["id"]
 
-    def terminate_user_session(self, user_id: str) -> dict:
+    def terminate_user_sessions(self, user_id: str) -> dict:
         """Kill session for a user.
 
         Raises:
             OktaApiException: If the API call fails.
         """
-        return self.make_api_call("DELETE", f"/users/{user_id}/sessions")
+        return self.make_api_call("DELETE", f"/users/{user_id}/sessions", parse_json=False)
 
     def suspend_user(self, user_id: str) -> dict:
         """Suspend a user.
