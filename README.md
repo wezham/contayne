@@ -7,6 +7,21 @@ Contayne is intended to be a library that implements common containment actions 
 1. Okta
 1. Slack
 
+# Usage
+
+
+## Okta
+```python
+okta_client = Okta("sample.okta.com", API_TOKEN)
+user_id = okta_client.find_user_id_by_email("test@test.com")
+okta_client.terminate_user_sessions(user_id)
+```
+## Slack
+slack_client = Slack(API_TOKEN)
+user_id = slack_client.find_user_id_by_email("test@test.com")
+slack_client.terminate_all_sessions(user_id)
+```
+
 # How to
 
 ## Okta
