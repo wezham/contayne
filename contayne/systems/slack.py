@@ -47,3 +47,11 @@ class Slack:
             SlackApiError: If the API call fails.
         """
         return self.client.admin_users_remove(user_id=user_id, team_id=team_id).validate()
+
+    def readd_user_to_workspace(self, user_id: str, team_id: str):
+        """Re-add a user to the workspace.
+
+        Raises:
+            SlackApiError: If the API call fails.
+        """
+        return self.client.admin_users_assign(user_id=user_id, team_id=team_id).validate()
