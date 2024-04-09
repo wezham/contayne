@@ -70,8 +70,9 @@ class Okta:
         Returns:
             The user's ID if found, otherwise None.
         """
-        result = self.make_api_call("GET", f"/users/{email}")
-        if isinstance(result, OktaError):
+        try:
+            result = self.make_api_call("GET", f"/users/{email}")
+        except OktaApiException:
             return None
         return result["id"]
 
@@ -90,3 +91,11 @@ class Okta:
            OktaApiException: If the API call fails.
         """
         return self.make_api_call("POST", f"/users/{user_id}/lifecycle/suspend")
+
+    def unsuspend_user(self, user_id: str) -> dict:
+        """Unsuspend a user.
+
+        Raises:
+            OktaApiException: If the API call fails.
+        """
+        return self.make_api_call("POST", f"/users/{user_id}/lifecycle/unsuspend")
