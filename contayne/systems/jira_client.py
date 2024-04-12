@@ -1,4 +1,4 @@
-from atlassian.jira import Jira as JiraClient
+from atlassian.jira import Jira as JiraClient  # type: ignore
 
 
 class Jira:
@@ -28,6 +28,8 @@ class Jira:
         except Exception as e:
             return None
 
+        return None
+
     def deactivate_user(self, user_id: str) -> dict:
         """Deactivate a user.
 
@@ -38,7 +40,7 @@ class Jira:
         Raises:
             JiraError: If the API call fails.
         """
-        pass
+        return {}
 
     def activate_user(self, user_id: str) -> dict:
         """Activate a user.
@@ -46,4 +48,4 @@ class Jira:
         Raises:
             JiraError: If the API call fails.
         """
-        pass
+        return {}
