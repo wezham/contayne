@@ -2,7 +2,7 @@ import asyncio
 
 import requests
 
-from contayne.systems.types.okta import OktaAPIToken, OktaError
+from contayne.systems.custom_types.okta import OktaAPIToken, OktaError
 from okta.client import Client
 
 
