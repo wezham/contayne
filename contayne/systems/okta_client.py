@@ -1,9 +1,9 @@
 import asyncio
 
 import requests
+from okta.client import Client
 
 from contayne.systems.custom_types.okta import OktaAPIToken, OktaError
-from okta.client import Client
 
 
 class OktaApiException(Exception):
