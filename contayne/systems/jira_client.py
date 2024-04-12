@@ -1,4 +1,4 @@
-from atlassian.jira import Jira as JiraClient  # type: ignore
+from atlassian.jira import Jira as JiraClient
 
 
 class Jira:
