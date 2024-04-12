@@ -22,11 +22,12 @@ Contayne is intended to be a library that implements common containment actions 
 # Supported Services 
 | Service | Containment Actions | Uncontain Actions | Supported |
 | ------- | ------------------ | ----------------- | ----------- |
-| Okta    | <ul><li>Revoking a user session</li><li>Revoking an API Token</li><li>Suspending a user</li></ul> | Reactivate a user | Yes |
-| Slack   | <ul><li>Revoke all user sessions</li><li>Suspend User</li><li>Activate User</li></ul> | - | Yes |
+| Okta    | <ul><li>Revoking a user session</li><li>Revoking an API Token</li><li>Suspending a user</li></ul> | <li>Activate a user</li></ul> | Yes |
+| Slack   | <ul><li>Revoke all user sessions</li><li>Suspend User</li> | <li>Activate User</li></ul>  | Yes |
 | AWS | | | No |
 | Workday | | | No |
 | Azure AD | | | No |
+| Salesforce | | | No |
 
 
 # Usage
