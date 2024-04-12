@@ -20,7 +20,8 @@ class Okta:
     def __init__(self, tenant_domain: str, api_key):
         self.api_base_url = f"https://{tenant_domain}/api/v1"
         self.api_key = api_key
-        # We use the okta client when we call supported functionality and use our own client when not
+        # We use the okta client when we call supported functionality and use our own client
+        # for unsupported functionality
         self.okta_client = Client({"orgUrl": f"https://{tenant_domain}", "token": self.api_key})
 
     def execute_async_request(self, coroutine):
