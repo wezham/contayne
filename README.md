@@ -19,12 +19,20 @@ Containment can comee in many different forms. Some sceneraios and containment a
 
 Contayne is intended to be a library that implements common containment actions for SaaS products in your environment
 
-# Services supported
-
-| Service | Containment Actions | Uncontain Actions |
-| ------- | ------------------ | ----------------- |
-| Okta    | * Revoking a user session * Revoking an API Token * Suspending a user | Reactivate a user |
-| Slack   | * Revoke all user sessions * Suspend User * Activate User | - |
+# Supported Services 
+| Service | Containment Actions | Uncontain Actions | Supported |
+| ------- | ------------------ | ----------------- | ----------- |
+| Okta    | 
+    * Revoking a user session 
+    * Revoking an API Token 
+    * Suspending a user | Reactivate a user | Yes |
+| Slack   | 
+    * Revoke all user sessions 
+    * Suspend User 
+    * Activate User | - | Yes |
+| AWS | | | No |
+| Workday | | | No |
+| Azure AD | | | No |
 
 
 # Usage
