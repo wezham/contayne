@@ -1,30 +1,9 @@
-from dataclasses import dataclass
+import asyncio
 
 import requests
 
-from contayne.systems.types.okta import OktaAPIToken
-
-
-@dataclass
-class OktaError:
-    """Represents an error returned by the Okta API."""
-
-    error_code: str | None
-    error_summary: str | None
-    error_id: str | None
-    error_link: str | None
-    error_causes: list[str] | None
-
-    @staticmethod
-    def from_dict(data: dict) -> "OktaError":
-        """Create an OktaError instance from a dictionary."""
-        return OktaError(
-            error_code=data.get("errorCode"),
-            error_summary=data.get("errorSummary"),
-            error_id=data.get("errorId"),
-            error_link=data.get("errorLink"),
-            error_causes=data.get("errorCauses", []),
-        )
+from contayne.systems.types.okta import OktaAPIToken, OktaError
+from okta.client import Client
 
 
 class OktaApiException(Exception):
@@ -41,6 +20,12 @@ class Okta:
     def __init__(self, tenant_domain: str, api_key):
         self.api_base_url = f"https://{tenant_domain}/api/v1"
         self.api_key = api_key
+        # We use the okta client when we call supported functionality and use our own client when not
+        self.okta_client = Client({"orgUrl": f"https://{tenant_domain}", "token": self.api_key})
+
+    def execute_async_request(self, coroutine):
+        event_loop = asyncio.get_event_loop()
+        return event_loop.run_until_complete(coroutine)
 
     def make_api_call(
         self,
@@ -65,6 +50,20 @@ class Okta:
         if parse_json is True:
             return response.json()
         return {"data": response.text}
+
+    def get_all_users(self, batch_size: int = 1):
+        """Get all users from Okta."""
+        users, resp, err = self.execute_async_request(
+            self.okta_client.list_users({"limit": batch_size})
+        )
+        if err:
+            raise RuntimeError(f"Failed to get users from Okta: {err}")
+
+        while resp and resp.has_next():
+            users, resp = self.execute_async_request(resp.next())
+            users.extend(users)
+
+        return users
 
     def find_user_id_by_email(self, email: str) -> str | None:
         """Find a user's ID by their email address.
