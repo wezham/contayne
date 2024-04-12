@@ -19,6 +19,16 @@ class Slack:
         except KeyError:
             return None
 
+    def fetch_all_users(self) -> list[dict]:
+        """Fetch all users."""
+        response = self.client.users_list()
+
+        users = response.data["members"]  # type: ignore
+        while cursor := response.data["response_metadata"].get("next_cursor"):  # type: ignore
+            response = self.client.users_list(cursor=cursor)
+            users.extend(response.data["members"])  # type: ignore
+        return users
+
     def find_team_id_for_user(self, user_id: str):
         """Find the team ID for a user.
 

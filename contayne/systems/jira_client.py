@@ -1,4 +1,4 @@
-from atlassian.jira import Jira as JiraClient  # type: ignore
+from atlassian.jira import Jira as JiraClient
 
 
 class Jira:
@@ -25,7 +25,7 @@ class Jira:
             )
             if users_found:
                 return users_found[0]["accountId"]
-        except Exception as e:
+        except Exception:
             return None
 
         return None

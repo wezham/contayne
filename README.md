@@ -24,6 +24,7 @@ Contayne is intended to be a library that implements common containment actions 
 | ------- | ------------------ | ----------------- | ----------- |
 | Okta    | <ul><li>Revoking a user session</li><li>Revoking an API Token</li><li>Suspending a user</li></ul> | <li>Activate a user</li></ul> | Yes |
 | Slack   | <ul><li>Revoke all user sessions</li><li>Suspend User</li> | <li>Activate User</li></ul>  | Yes |
+| Github | <ul><li>Block User</li><li>Suspend User</li>| <ul><li>Unblock user </li>| No |
 | AWS | | | No |
 | Workday | | | No |
 | Azure AD | | | No |
