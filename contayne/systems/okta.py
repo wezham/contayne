@@ -2,6 +2,8 @@ from dataclasses import dataclass
 
 import requests
 
+from contayne.systems.types.okta import OktaAPIToken
+
 
 @dataclass
 class OktaError:
@@ -99,3 +101,21 @@ class Okta:
             OktaApiException: If the API call fails.
         """
         return self.make_api_call("POST", f"/users/{user_id}/lifecycle/unsuspend")
+
+    def list_api_tokens(self) -> list[OktaAPIToken]:
+        """List all api tokens in the account."""
+        return [OktaAPIToken.from_dict(token) for token in self.make_api_call("GET", "/api-tokens")]
+
+    def revoke_api_token(self, token_id: str) -> dict:
+        """Revoke an API token."""
+        return self.make_api_call("DELETE", f"/api-tokens/{token_id}", parse_json=False)
+
+    def revoke_api_tokens_for_user(self, user_id: str) -> dict:
+        """Revoke all of a users API Tokens."""
+        user_tokens = [token for token in self.list_api_tokens() if token.user_id == user_id]
+
+        tokens_revoked = []
+        for token in user_tokens:
+            self.revoke_api_token(token.id)
+            tokens_revoked.append(token.id)
+        return {"tokens_revoked": tokens_revoked}
