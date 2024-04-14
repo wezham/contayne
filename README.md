@@ -24,8 +24,8 @@ Contayne is intended to be a library that implements common containment actions 
 | ------- | ------------------ | ----------------- | ----------- |
 | Okta    | <ul><li>Revoking a user session</li><li>Revoking an API Token</li><li>Suspending a user</li></ul> | <li>Activate a user</li></ul> | Yes |
 | Slack   | <ul><li>Revoke all user sessions</li><li>Suspend User</li> | <li>Activate User</li></ul>  | Yes |
-| Github | <ul><li>Remove user from org</li><li>Remove org roles assigned to user</li>| <ul><li>Add user to organisation</li>| No |
-| AWS | | | No |
+| Github | <ul><li>Remove user from org</li><li>Remove org roles assigned to user</li></ul>| <ul><li>Add user to organisation</li></ul>| Yes |
+| AWS | <ul><li>Detach policie(s) from IAM user</li><li>Delete IAM user</li><li>Remove user from all group(s)</li></ul>| | Yes |
 | Workday | | | No |
 | Azure AD | | | No |
 | Salesforce | | | No |
@@ -69,3 +69,16 @@ You will need an Enterprise Slack license.
 
 1. Create an API Token
 2. Provide that API token in a secure fashion
+
+## AWS
+
+These are known required permissions:
+```
+"iam:ListUsers",
+"iam:ListUserPolicies",
+"iam:ListAttachedUserPolicies",
+"iam:DeleteUserPolicy",
+"iam:DetachUserPolicy",
+"iam:ListGroupsForUser"
+```
+
