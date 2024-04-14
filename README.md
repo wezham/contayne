@@ -4,7 +4,7 @@ In the modern technology organisation, sensitive data lives in the cloud in tens
 Within your organisation, a user or entity has access to the data in these applications. As a security team, we want to be
 able to respond and contain suspicious activity in these applications. To do this, we have tools like EDR solutions that help us contain on an endpoint. However, SAAS applications are still relatively new and suite of tools is less mature.
 
-This library aims to solve the problem of containment in third party SaaS applications. It aims to be the building blocks for a more complex containment solution. This type of behaviour may already be bundled up in existing security solutions however this is intended for those who dont have those or who want a more programatic approach.
+This library aims to solve the problem of containment in third party SaaS applications. It aims to be the building blocks for a more complex containment solution. This type of behaviour may already be bundled up in existing security solutions however this is intended for those without access to tools, or who want a more customisable option.
 
 Containment can comee in many different forms. Some sceneraios and containment actions are listed below. Please raise issues for any more you would like to see:
 
